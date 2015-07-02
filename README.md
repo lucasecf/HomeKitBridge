@@ -1,6 +1,8 @@
 HomeKitBridge
 =============
 
+![Image of Yaktocat](Images/image_1.png)
+
 This project is base in the awesome [project](https://github.com/KhaosT/HomeKitBridge) made by KhaosT.
 
 The goal is basically integrate the Philips Hue Lights to the HomeKit, as Philips has not done this yet. This allows cool features, like use any HomeKit apps, or even the Siri.
