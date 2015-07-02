@@ -29,13 +29,13 @@ Download [Here](https://github.com/lucasecf/HomeKitBridge/releases/download/1.0/
 
 Commom problems:
 
-1. If you don't see the Bridge in your search inside the HomeKit app
+* If you don't see the Bridge in your search inside the HomeKit app
  
 ```
 - Click in the Reset Pairing Button
 ```
 
-2. If you see the message "No Local Connection", or if you were never asked to press the bridge button, follow the steps below:
+* If you see the message "No Local Connection", or if you were never asked to press the bridge button, follow the steps below:
 
 ```
 - Make sure your mac and bridge are in the same network
