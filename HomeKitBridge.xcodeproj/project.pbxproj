@@ -47,6 +47,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		006874B61B3CF1CA00A241F9 /* HomeKitBridge-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HomeKitBridge-Prefix.pch"; sourceTree = "<group>"; };
 		CC467F471978E8DB00581A31 /* HomeKitBridge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HomeKitBridge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC467F4B1978E8DB00581A31 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CC467F4C1978E8DB00581A31 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -235,6 +236,7 @@
 				CC7CA81219790B70001033F9 /* HAPAccessoryKit */,
 				CC467F4B1978E8DB00581A31 /* Info.plist */,
 				CC467F4C1978E8DB00581A31 /* main.m */,
+				006874B61B3CF1CA00A241F9 /* HomeKitBridge-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -595,6 +597,7 @@
 					"$(DEVELOPER_DIR)$(LOCAL_LIBRARY_DIR)/PrivateFrameworks",
 					"\"/Applications/HomeKit Accessory Simulator.app/Contents/Frameworks\"",
 				);
+				GCC_PREFIX_HEADER = "HomeKitBridge/HomeKitBridge-Prefix.pch";
 				INFOPLIST_FILE = HomeKitBridge/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks \"/Applications/HomeKit Accessory Simulator.app/Contents/Frameworks\"";
 				OTHER_LDFLAGS = "-ObjC";
@@ -615,6 +618,7 @@
 					"$(DEVELOPER_DIR)$(LOCAL_LIBRARY_DIR)/PrivateFrameworks",
 					"\"/Applications/HomeKit Accessory Simulator.app/Contents/Frameworks\"",
 				);
+				GCC_PREFIX_HEADER = "HomeKitBridge/HomeKitBridge-Prefix.pch";
 				INFOPLIST_FILE = HomeKitBridge/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks \"/Applications/HomeKit Accessory Simulator.app/Contents/Frameworks\"";
 				OTHER_LDFLAGS = "-ObjC";

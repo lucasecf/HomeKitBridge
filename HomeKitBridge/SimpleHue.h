@@ -13,6 +13,7 @@
 
 @property (nonatomic,weak) OTIHAPCore *accessoryCore;
 
+- (void)stop;
 - (void)startSearch;
 
 @end

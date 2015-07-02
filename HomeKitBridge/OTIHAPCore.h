@@ -13,9 +13,13 @@
 
 @interface OTIHAPCore : NSObject
 
-- (id)initAsBridge:(BOOL)isBridge;
+- (id)initAsBridge:(BOOL)isBridge withName:(NSString*)name andSerialNumber:(NSString*)serialNumber;
 - (void)startTransport;
+
 - (void)resetTransportPairings;
+- (void)clearHomeData;
+- (void)removeAllAccessories;
+
 - (HAKAccessory *)addAccessory:(HAKAccessory *)accessory;
 - (HAKAccessory *)createHueAccessoryWithUUID:(NSString *)uuid Name:(NSString *)name;
 - (NSString *)password;

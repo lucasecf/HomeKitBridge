@@ -40,7 +40,7 @@
 }
 
 - (void)buttonNotPressed:(NSNotification *)notification {
-    NSLog(@"Press the button on the bridge to finish the setup.");
+    LOG_MESSAGE(@"Press the button on the bridge to finish the setup.");
 }
 
 - (void)addIdentifyAnimation

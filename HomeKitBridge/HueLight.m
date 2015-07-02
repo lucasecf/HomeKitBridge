@@ -110,7 +110,7 @@
                         [currentLightState setAlert:ALERT_LSELECT];
                         [[[[PHOverallFactory alloc] init] bridgeSendAPI] updateLightStateForId:_huelight.identifier withLighState:lightState completionHandler:^(NSArray *errors) {
                             if (errors) {
-                                NSLog(@"ERROR:%@",errors);
+                                LOG_MESSAGE([NSString stringWithFormat: @"ERROR:%@",errors]);
                             }
                         }];
                     });
@@ -121,7 +121,7 @@
                         [currentLightState setAlert:ALERT_NONE];
                         [[[[PHOverallFactory alloc] init] bridgeSendAPI] updateLightStateForId:_huelight.identifier withLighState:lightState completionHandler:^(NSArray *errors) {
                             if (errors) {
-                                NSLog(@"ERROR:%@",errors);
+                                LOG_MESSAGE([NSString stringWithFormat:@"ERROR:%@",errors]);
                             }
                         }];
                     });
@@ -133,14 +133,14 @@
             if ([value isKindOfClass:[NSNumber class]]) {
                 dispatch_async(dispatch_get_global_queue(0, 0), ^{
                     if (![currentLightState.on isEqualToNumber:value]) {
-                        NSLog(@"UpdateOn:%@",value);
+                        LOG_MESSAGE([NSString stringWithFormat:@"UpdateOn:%@",value]);
                         _pendingUpdate = YES;
                         PHLightState *lightState = [[PHLightState alloc] init];
                         [lightState setOn:value];
                         [currentLightState setOn:value];
                         [[[[PHOverallFactory alloc] init] bridgeSendAPI] updateLightStateForId:_huelight.identifier withLighState:lightState completionHandler:^(NSArray *errors) {
                             if (errors) {
-                                NSLog(@"ERROR:%@",errors);
+                                LOG_MESSAGE([NSString stringWithFormat:@"ERROR:%@",errors]);
                             }
                         }];
                     }
@@ -152,7 +152,7 @@
             if ([value isKindOfClass:[NSNumber class]]) {
                 dispatch_async(dispatch_get_global_queue(0, 0), ^{
                     if (![currentLightState.hue isEqualToNumber:value]) {
-                        NSLog(@"UpdateHue:%@",value);
+                        LOG_MESSAGE([NSString stringWithFormat:@"UpdateHue:%@",value]);
                         int hueConverted = ([value intValue]/360.0)*65535;
                         
                         _pendingUpdate = YES;
@@ -162,7 +162,7 @@
                         [currentLightState setHue:@(hueConverted)];
                         [[[[PHOverallFactory alloc] init] bridgeSendAPI] updateLightStateForId:_huelight.identifier withLighState:lightState completionHandler:^(NSArray *errors) {
                             if (errors) {
-                                NSLog(@"ERROR:%@",errors);
+                                LOG_MESSAGE([NSString stringWithFormat:@"ERROR:%@",errors]);
                             }
                         }];
                     }
@@ -174,7 +174,7 @@
             if ([value isKindOfClass:[NSNumber class]]) {
                 dispatch_async(dispatch_get_global_queue(0, 0), ^{
                     if (![currentLightState.saturation isEqualToNumber:value]) {
-                        NSLog(@"UpdateSaturation:%@",value);
+                        LOG_MESSAGE([NSString stringWithFormat:@"UpdateSaturation:%@",value]);
                         int satConverted = ([value intValue]/100.0)*254;
                         
                         _pendingUpdate = YES;
@@ -183,7 +183,7 @@
                         [currentLightState setSaturation:@(satConverted)];
                         [[[[PHOverallFactory alloc] init] bridgeSendAPI] updateLightStateForId:_huelight.identifier withLighState:lightState completionHandler:^(NSArray *errors) {
                             if (errors) {
-                                NSLog(@"ERROR:%@",errors);
+                                LOG_MESSAGE([NSString stringWithFormat:@"ERROR:%@",errors]);
                             }
                         }];
                     }
@@ -195,7 +195,7 @@
             if ([value isKindOfClass:[NSNumber class]]) {
                 dispatch_async(dispatch_get_global_queue(0, 0), ^{
                     if (![currentLightState.brightness isEqualToNumber:value]) {
-                        NSLog(@"UpdateBrightness:%@",value);
+                        LOG_MESSAGE([NSString stringWithFormat:@"UpdateBrightness:%@",value]);
                         int brightConverted = ([value intValue]/100.0)*254;
                         
                         _pendingUpdate = YES;
@@ -204,7 +204,7 @@
                         [currentLightState setBrightness:@(brightConverted)];
                         [[[[PHOverallFactory alloc] init] bridgeSendAPI] updateLightStateForId:_huelight.identifier withLighState:lightState completionHandler:^(NSArray *errors) {
                             if (errors) {
-                                NSLog(@"ERROR:%@",errors);
+                                LOG_MESSAGE([NSString stringWithFormat:@"ERROR:%@",errors]);
                             }
                         }];
                     }

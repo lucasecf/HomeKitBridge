@@ -10,6 +10,8 @@
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 
++ (AppDelegate*)appDelegate;
 
 @end
 
+void LOG_MESSAGE(NSString *logMessage);

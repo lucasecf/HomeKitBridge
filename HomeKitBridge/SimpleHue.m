@@ -37,6 +37,7 @@
         _hueCentral = [[PHHueSDK alloc]init];
         [_hueCentral startUpSDK];
         
+        
         [[PHNotificationManager defaultManager] registerObject:self withSelector:@selector(localConnection) forNotification:LOCAL_CONNECTION_NOTIFICATION];
         [[PHNotificationManager defaultManager] registerObject:self withSelector:@selector(noLocalConnection) forNotification:NO_LOCAL_CONNECTION_NOTIFICATION];
         [[PHNotificationManager defaultManager] registerObject:self withSelector:@selector(notAuthenticated) forNotification:NO_LOCAL_AUTHENTICATION_NOTIFICATION];
@@ -48,27 +49,37 @@
     return self;
 }
 
+- (void)stop {
+    [_hueCentral stopSDK];
+    
+    [[PHNotificationManager defaultManager] deregisterObject:self forNotification:LOCAL_CONNECTION_NOTIFICATION];
+    [[PHNotificationManager defaultManager] deregisterObject:self forNotification:NO_LOCAL_CONNECTION_NOTIFICATION];
+    [[PHNotificationManager defaultManager] deregisterObject:self forNotification:NO_LOCAL_AUTHENTICATION_NOTIFICATION];
+    [[PHNotificationManager defaultManager] deregisterObject:self forNotification:PUSHLINK_LOCAL_AUTHENTICATION_SUCCESS_NOTIFICATION];
+    [[PHNotificationManager defaultManager] deregisterObject:self forNotification:PUSHLINK_LOCAL_AUTHENTICATION_FAILED_NOTIFICATION];
+}
+
 - (void)localConnection {
     [self updateLights];
 }
 
 - (void)noLocalConnection {
-    NSLog(@"No Local Connection");
+    LOG_MESSAGE(@"No Local Connection");
 }
 
 - (void)notAuthenticated {
-    NSLog(@"Not Authenticated");
+    LOG_MESSAGE(@"Not Authenticated");
     [self doAuthentication];
 }
 
 - (void)authenticationSuccess {
-    NSLog(@"Authentication Success!");
+    LOG_MESSAGE(@"Authentication Success!");
     [self setupLights];
     [self performSelector:@selector(enableLocalHeartbeat) withObject:nil afterDelay:1];
 }
 
 - (void)authenticationFailed {
-    NSLog(@"Authentication Failed");
+    LOG_MESSAGE(@"Authentication Failed");
 }
 
 - (void)updateLights {
@@ -94,11 +105,17 @@
     _searchingObject = [[PHBridgeSearching alloc] initWithUpnpSearch:YES andPortalSearch:YES andIpAdressSearch:YES];
     [_searchingObject startSearchWithCompletionHandler:^(NSDictionary *bridgesFound) {
         if (bridgesFound.count > 0) {
-            NSLog(@"Bridges Found:%@",bridgesFound);
+            
+            int i = 1;
+            for (NSString *key in bridgesFound) {
+                LOG_MESSAGE([NSString stringWithFormat:@"Bridge %d Found:%@ - %@",i, key, bridgesFound[key]]);
+                i++;
+            }
+            
             NSString *macAddress = bridgesFound.allKeys.firstObject;
             [self setBridgeWithIP:bridgesFound[macAddress] andMAC:macAddress];
         }else{
-            NSLog(@"No bridges found");
+            LOG_MESSAGE([NSString stringWithFormat:@"No bridges found"]);
         }
     }];
 }

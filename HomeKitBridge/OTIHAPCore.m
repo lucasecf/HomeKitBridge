@@ -38,7 +38,7 @@
         {
             _bridgeTransport = [NSKeyedUnarchiver unarchiveObjectWithFile:[[self homeDataPath] path]];
             if (_bridgeTransport) {
-                NSLog(@"Find Transport");
+                LOG_MESSAGE(@"Find Transport");
                 for (HAKAccessory *accessory in _bridgeTransport.accessories) {
                     [_accessories setObject:accessory forKey:accessory.serialNumber];
                 }
@@ -64,12 +64,29 @@
     return [appSupportDir URLByAppendingPathComponent:@"HomeDataV2.plist"];
 }
 
-- (id)initAsBridge:(BOOL)isBridge {
+- (void)clearHomeData {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    
+    NSError *error;
+    [fileManager removeItemAtPath:[[self homeDataPath] path] error:&error];
+    
+    if (error) {
+        LOG_MESSAGE([NSString stringWithFormat:@"%@", error]);
+    }
+}
+
+- (void)removeAllAccessories {
+    for (id accessory in _accessories.allValues) {
+        [_bridgeTransport removeAccessory:accessory];
+    }
+}
+
+- (id)initAsBridge:(BOOL)isBridge withName:(NSString*)name andSerialNumber:(NSString*)serialNumber {
     self = [self init];
     
     if (isBridge) {
         _isBridge = true;
-        [self setupBridgeAccessory];
+        [self setupBridgeAccessoryWithName:name andSerialNumber:serialNumber];
     }
     
     return self;
@@ -87,12 +104,12 @@
 - (void)setupHAP {    
     _bridgeTransport = [[HAKIPTransport alloc] init];
     
-    NSLog(@"Finished. Password:%@", _bridgeTransport.password);
+    LOG_MESSAGE([NSString stringWithFormat:@"Finished. Password:%@", _bridgeTransport.password]);
 }
 
-- (void)setupBridgeAccessory {
+- (void)setupBridgeAccessoryWithName:(NSString*)name andSerialNumber:(NSString*)serialNumber {
     HAKAccessory *bridgeAccessory = [[HAKAccessory alloc] init];
-    bridgeAccessory.name = @"Hue Bridge";
+    bridgeAccessory.name = name;
     bridgeAccessory.manufacturer = @"Philips";
     bridgeAccessory.serialNumber = @"F7B47CD5EA72";
     bridgeAccessory.model = @"Hue Bridge";
@@ -101,7 +118,7 @@
 }
 
 - (HAKAccessory *)addAccessory:(HAKAccessory *)accessory {
-    NSLog(@"Add accessory:%@",accessory);
+    LOG_MESSAGE([NSString stringWithFormat:@"addAccessory:%@",accessory]);
     if (!accessory) {
         return nil;
     }
@@ -120,7 +137,7 @@
 }
 
 - (HAKAccessory *)createHueAccessoryWithUUID:(NSString *)uuid Name:(NSString *)name {
-    NSLog(@"Init Accessory With UUID:%@, name:%@",uuid,name);
+    LOG_MESSAGE([NSString stringWithFormat:@"Init Accessory With UUID:%@, name:%@", uuid, name]);
     HAKAccessory *hueAccessory = [[HAKAccessory alloc]init];
     hueAccessory.name = name;
     hueAccessory.serialNumber = uuid;
