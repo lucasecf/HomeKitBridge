@@ -3,7 +3,7 @@ HomeKitBridge
 
 ![Image of Yaktocat](Images/image_1.png)
 
-This project is base in the awesome [project](https://github.com/KhaosT/HomeKitBridge) made by KhaosT.
+This project is based in the awesome [project](https://github.com/KhaosT/HomeKitBridge) made by KhaosT.
 
 The goal is basically integrate the Philips Hue Lights to the HomeKit, as Philips has not done this yet. This allows cool features, like use any HomeKit apps, or even the Siri.
 
@@ -11,7 +11,7 @@ The goal is basically integrate the Philips Hue Lights to the HomeKit, as Philip
 
 #What's new
 
-The KhaosT project depends on the use of Xcode, you have to check the console of the application to know, for example, when to press the bridge button. My main goal is to get a standalone app, without the need of the Xcode, so other people that are not programmers will be able to use the app.  Also, I added some buttons to help to fix some minor connection bugs, as the infine "No Local Connection" message.
+The KhaosT project depends on the use of Xcode, you have to check the console of the application to know, for example, when to press the bridge button. My main goal is to get a standalone app, without the need of the Xcode, so other people that are not programmers would be able to use the app.  Also, I added some buttons to help to fix some minor connection bugs.
 
 #Download
 
@@ -29,11 +29,12 @@ Download [Here](https://github.com/lucasecf/HomeKitBridge/releases/download/1.0/
 
 #Troubleshoot
 
-Commom problems:
+Common problems:
 
 * If you don't see the Bridge in your search inside the HomeKit app
  
 ```
+- Make sure your mac and bridge are in the same network
 - Click in the Reset Pairing Button
 ```
 
